@@ -1,0 +1,12 @@
+<?php
+    if (isset($_COOKIE["user_name"])) {
+        echo "Welcome back, " . $_COOKIE["user_name"] . "!<br>";
+        echo "Your registered email: " . $_COOKIE["user_email"] . "<br>";
+    } else {
+        echo "No cookie found. Please fill the form first (see 3.1).";
+    }
+
+    // Print all cookies
+    echo "<br><b>All Cookies:</b><br>";
+    print_r($_COOKIE);
+?>
