@@ -1,0 +1,53 @@
+<?php
+    session_start();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+
+        // Simple hardcoded check (replace with DB check in real project)
+        if ($username == "admin" && $password == "admin123") {
+            $_SESSION["loggedin"] = true;
+            $_SESSION["username"] = $username;
+            header("Location: home.php");
+            exit();
+        } else {
+            $error = "Invalid username or password!";
+        }
+    }
+?>
+
+<?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+<form method="post">
+    Username: <input type="text" name="username" required><br><br>
+    Password: <input type="password" name="password" required><br><br>
+    <input type="submit" value="Login">
+</form>
+
+<?php
+    session_start();
+
+    // Prevent access if not logged in (also prevents back-button access after logout)
+    if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+        header("Location: login.php");
+        exit();
+    }
+
+    // Prevent caching of this page (important for back-button issue)
+    header("Cache-Control: no-cache, no-store, must-revalidate");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+?>
+
+<h2>Welcome, <?php echo $_SESSION["username"]; ?>!</h2>
+<p>This is the protected home page.</p>
+<a href="logout.php">Logout</a>
+
+
+<?php
+    session_start();
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit();
+?>
