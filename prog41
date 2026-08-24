@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>Simple XMLHttpRequest</title></head>
+<body>
+    <h2>XMLHttpRequest Example</h2>
+    <div id="demo"></div>
+
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "data.txt", false); // synchronous request
+        xhttp.send();
+        document.getElementById("demo").innerHTML = xhttp.responseText;
+    </script>
+</body>
+</html>
