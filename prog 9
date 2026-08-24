@@ -1,0 +1,17 @@
+<?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $input = $_POST["arrValues"];
+        $arr = explode(",", $input);
+
+        echo "Original Array: " . implode(", ", $arr) . "<br>";
+
+        $reversed = array_reverse($arr);
+        echo "Reversed Array: " . implode(", ", $reversed);
+    }
+?>
+
+<form method="post">
+    Enter array values (comma separated): 
+    <input type="text" name="arrValues" placeholder="e.g. 1,2,3,4,5">
+    <input type="submit" value="Reverse">
+</form>
