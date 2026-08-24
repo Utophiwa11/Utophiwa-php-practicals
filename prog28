@@ -1,0 +1,14 @@
+<?php
+    if (!isset($_COOKIE["visitor_status"])) {
+        // First time visitor
+        setcookie("visitor_status", "visited", time() + (30 * 24 * 60 * 60)); // 30 days
+        setcookie("visit_count", "1", time() + (30 * 24 * 60 * 60));
+        echo "Welcome! You are a NEW visitor to this site.";
+    } else {
+        // Repeated visitor - increment visit count
+        $count = isset($_COOKIE["visit_count"]) ? (int)$_COOKIE["visit_count"] + 1 : 1;
+        setcookie("visit_count", $count, time() + (30 * 24 * 60 * 60));
+        echo "Welcome back! You are a REPEATED visitor.<br>";
+        echo "You have visited this site $count time(s).";
+    }
+?>
