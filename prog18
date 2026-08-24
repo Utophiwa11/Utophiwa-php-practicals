@@ -1,0 +1,24 @@
+<?php
+    $conn = new mysqli("localhost", "root", "", "test_db");
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT 
+                DAYOFWEEK(CURDATE()) AS day_of_week,
+                WEEKDAY(CURDATE()) AS week_day,
+                DAYOFMONTH(CURDATE()) AS day_of_month,
+                DAYOFYEAR(CURDATE()) AS day_of_year,
+                DAYNAME(CURDATE()) AS day_name";
+
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    echo "<b>1) DAYOFWEEK():</b> " . $row["day_of_week"] . " (1=Sunday, 7=Saturday)<br>";
+    echo "<b>2) WEEKDAY():</b> " . $row["week_day"] . " (0=Monday, 6=Sunday)<br>";
+    echo "<b>3) DAYOFMONTH():</b> " . $row["day_of_month"] . "<br>";
+    echo "<b>4) DAYOFYEAR():</b> " . $row["day_of_year"] . "<br>";
+    echo "<b>5) DAYNAME():</b> " . $row["day_name"] . "<br>";
+
+    $conn->close();
+?>
