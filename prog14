@@ -1,0 +1,19 @@
+<?php
+    $str = "Welcome to PHP Programming";
+
+    echo "<b>Original String:</b> $str <br><br>";
+
+    echo "<b>1) strlen():</b> " . strlen($str) . "<br>";
+
+    echo "<b>2) strpos():</b> ";
+    $pos = strpos($str, "PHP");
+    echo "'PHP' found at position: $pos <br>";
+
+    echo "<b>3) str_word_count():</b> " . str_word_count($str) . " words<br>";
+
+    echo "<b>4) strrev():</b> " . strrev($str) . "<br>";
+
+    echo "<b>5) strtolower():</b> " . strtolower($str) . "<br>";
+
+    echo "<b>6) strtoupper():</b> " . strtoupper($str) . "<br>";
+?>
