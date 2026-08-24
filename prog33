@@ -1,0 +1,33 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "test_db";
+
+    // ---------- Using MySQLi ----------
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+
+    $sql = "INSERT INTO students (name, email, course) 
+            VALUES ('Rahul Sharma', 'rahul@example.com', 'BCA')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "MySQLi: New record inserted successfully! ID: " . $conn->insert_id . "<br>";
+    } else {
+        echo "Error: " . $conn->error . "<br>";
+    }
+    $conn->close();
+
+    // ---------- Using PDO ----------
+    try {
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "INSERT INTO teachers (name, subject) VALUES ('Priya Patel', 'PHP Programming')";
+        $pdo->exec($sql);
+        echo "PDO: New record inserted successfully! ID: " . $pdo->lastInsertId();
+    } catch (PDOException $e) {
+        echo "PDO Error: " . $e->getMessage();
+    }
+    $pdo = null;
+?>
