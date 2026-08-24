@@ -1,0 +1,15 @@
+<?php
+    echo "<h2>This is the Header Section</h2>";
+    echo "<hr>";
+?>
+
+<?php
+    echo "<hr>";
+    echo "<p>Copyright &copy; 2026 - All Rights Reserved</p>";
+?>
+
+<?php
+    include "header.php";   // if file missing -> Warning, script continues
+    echo "<p>This is the main body content of the page.</p>";
+    require "footer.php";   // if file missing -> Fatal Error, script stops
+?>
