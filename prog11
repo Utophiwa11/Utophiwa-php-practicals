@@ -1,0 +1,32 @@
+<?php
+    // Numeric Array - Days of week (Monday to Saturday)
+    $days = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+
+    echo "<b>Numeric Array (Days):</b><br>";
+    for ($i = 0; $i < count($days); $i++) {
+        echo "Day[$i]: " . $days[$i] . "<br>";
+    }
+
+    // Associative Array - Month with total days
+    $monthDays = array(
+        "January" => 31, "February" => 28, "March" => 31, "April" => 30,
+        "May" => 31, "June" => 30, "July" => 31, "August" => 31,
+        "September" => 30, "October" => 31, "November" => 30, "December" => 31
+    );
+
+    echo "<br><b>Associative Array (Month => Days):</b><br>";
+    foreach ($monthDays as $month => $totalDays) {
+        echo "$month => $totalDays days<br>";
+    }
+
+    // Multidimensional Array - Laptops (2 companies)
+    $laptops = array(
+        "Dell" => array("model" => "Inspiron 15", "price" => 55000),
+        "HP" => array("model" => "Pavilion 14", "price" => 62000)
+    );
+
+    echo "<br><b>Multidimensional Array (Laptops):</b><br>";
+    foreach ($laptops as $company => $details) {
+        echo "Company: $company, Model: " . $details["model"] . ", Price: Rs. " . $details["price"] . "<br>";
+    }
+?>
