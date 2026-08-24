@@ -1,0 +1,41 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "test_db";
+
+    // ---------- Using MySQLi Prepared Statement ----------
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+
+    $stmt = $conn->prepare("INSERT INTO students (name, email, course) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $name, $email, $course);
+
+    $name = "Anjali Mehta";
+    $email = "anjali@example.com";
+    $course = "MCA";
+    $stmt->execute();
+
+    echo "MySQLi Prepared Statement: Record inserted! ID: " . $stmt->insert_id . "<br>";
+    $stmt->close();
+    $conn->close();
+
+    // ---------- Using PDO Prepared Statement ----------
+    try {
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $pdo->prepare("INSERT INTO teachers (name, subject) VALUES (:name, :subject)");
+        $stmt->bindParam(':name', $tname);
+        $stmt->bindParam(':subject', $subject);
+
+        $tname = "Kiran Joshi";
+        $subject = "Database Management";
+        $stmt->execute();
+
+        echo "PDO Prepared Statement: Record inserted! ID: " . $pdo->lastInsertId();
+    } catch (PDOException $e) {
+        echo "PDO Error: " . $e->getMessage();
+    }
+    $pdo = null;
+?>
