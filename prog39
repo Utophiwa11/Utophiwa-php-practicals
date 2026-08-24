@@ -1,0 +1,47 @@
+<?php
+    session_start();
+    $error = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $servername = "localhost";
+        $dbUser = "root";
+        $dbPass = "";
+        $dbname = "test_db";
+
+        $conn = new mysqli($servername, $dbUser, $dbPass, $dbname);
+        if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+
+        // Prepared statement to prevent SQL injection
+        $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            // If passwords were hashed during registration use password_verify()
+            if (password_verify($password, $row["password"]) || $password === $row["password"]) {
+                $_SESSION["loggedin"] = true;
+                $_SESSION["username"] = $row["username"];
+                header("Location: home.php");
+                exit();
+            } else {
+                $error = "Invalid username or password!";
+            }
+        } else {
+            $error = "Invalid username or password!";
+        }
+        $stmt->close();
+        $conn->close();
+    }
+?>
+
+<?php if ($error != "") echo "<p style='color:red;'>$error</p>"; ?>
+<form method="post">
+    Username: <input type="text" name="username" required><br><br>
+    Password: <input type="password" name="password" required><br><br>
+    <input type="submit" value="Login">
+</form>
