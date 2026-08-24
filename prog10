@@ -1,0 +1,15 @@
+<?php
+    $array1 = array(1, 2, 3, 4, 5);
+    $array2 = array(6, 7, 8, 9, 10);
+
+    echo "Array 1: " . implode(", ", $array1) . "<br>";
+    echo "Array 2: " . implode(", ", $array2) . "<br>";
+
+    // Using array_merge()
+    $mergedArray = array_merge($array1, $array2);
+    echo "Merged Array: " . implode(", ", $mergedArray) . "<br>";
+
+    // Using + operator (keeps keys from first array, no duplicate overwrite)
+    $mergedArray2 = $array1 + $array2;
+    echo "Merged (using + operator): " . implode(", ", $mergedArray2);
+?>
