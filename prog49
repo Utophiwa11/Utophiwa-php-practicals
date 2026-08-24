@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Suggestions</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Search:</h2>
+    <input type="text" id="search" placeholder="Type a name...">
+    <div id="suggestions"></div>
+
+    <script>
+        $(document).ready(function() {
+            $("#search").on("keyup", function() {
+                var query = $(this).val();
+                if (query.length > 0) {
+                    $.ajax({
+                        url: "search.php",
+                        method: "GET",
+                        data: { q: query },
+                        success: function(response) {
+                            $("#suggestions").html(response);
+                        }
+                    });
+                } else {
+                    $("#suggestions").html("");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+<?php
+    $names = array("Amit", "Amita", "Anita", "Ankit", "Bhavesh", "Bhavna", "Chirag");
+    $q = strtolower($_GET["q"]);
+
+    $matches = array();
+    foreach ($names as $name) {
+        if (strpos(strtolower($name), $q) !== false) {
+            $matches[] = $name;
+        }
+    }
+
+    if (count($matches) > 0) {
+        echo "<ul>";
+        foreach ($matches as $match) {
+            echo "<li>$match</li>";
+        }
+        echo "</ul>";
+    } else {
+        echo "No matches found.";
+    }
+?>
