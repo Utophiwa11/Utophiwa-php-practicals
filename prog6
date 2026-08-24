@@ -1,0 +1,16 @@
+<?php
+    // Using while loop
+    echo "<b>Using while loop:</b><br>";
+    $i = 15;
+    while ($i <= 20) {
+        echo $i . " ";
+        $i++;
+    }
+
+    echo "<br><br><b>Using do-while loop:</b><br>";
+    $j = 15;
+    do {
+        echo $j . " ";
+        $j++;
+    } while ($j <= 20);
+?>
