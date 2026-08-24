@@ -1,0 +1,46 @@
+<?php
+    $conn = new mysqli("localhost", "root", "", "test_db");
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    echo "<b>1) LENGTH()</b><br>";
+    $sql = "SELECT LENGTH('Programming') AS str_length";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    echo "Length: " . $row["str_length"] . "<br><br>";
+
+    echo "<b>2) CONCAT()</b><br>";
+    $sql = "SELECT CONCAT('PHP', ' ', 'MySQL') AS combined";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    echo "Result: " . $row["combined"] . "<br><br>";
+
+    echo "<b>3) CONCAT_WS()</b><br>";
+    $sql = "SELECT CONCAT_WS('-', '2026', '08', '24') AS date_str";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    echo "Result: " . $row["date_str"] . "<br><br>";
+
+    echo "<b>4) TRIM(), RTRIM(), LTRIM()</b><br>";
+    $sql = "SELECT TRIM('   Hello World   ') AS trimmed,
+                   RTRIM('Hello World   ') AS rtrimmed,
+                   LTRIM('   Hello World') AS ltrimmed";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    echo "TRIM: '" . $row["trimmed"] . "'<br>";
+    echo "RTRIM: '" . $row["rtrimmed"] . "'<br>";
+    echo "LTRIM: '" . $row["ltrimmed"] . "'<br><br>";
+
+    echo "<b>5) LPAD(), RPAD(), LOCATE()</b><br>";
+    $sql = "SELECT LPAD('45', 5, '0') AS lpadded,
+                   RPAD('45', 5, '*') AS rpadded,
+                   LOCATE('Java', 'I love JavaScript') AS position";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    echo "LPAD: " . $row["lpadded"] . "<br>";
+    echo "RPAD: " . $row["rpadded"] . "<br>";
+    echo "LOCATE: " . $row["position"] . "<br>";
+
+    $conn->close();
+?>
