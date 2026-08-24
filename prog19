@@ -1,0 +1,24 @@
+<?php
+    $conn = new mysqli("localhost", "root", "", "test_db");
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT 
+                HOUR(CURTIME()) AS cur_hour,
+                MINUTE(CURTIME()) AS cur_minute,
+                SECOND(CURTIME()) AS cur_second,
+                DATE_FORMAT(NOW(), '%W, %d %M %Y') AS formatted_date,
+                DATE_SUB(CURDATE(), INTERVAL 10 DAY) AS date_before_10days";
+
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    echo "<b>1) HOUR():</b> " . $row["cur_hour"] . "<br>";
+    echo "<b>2) MINUTE():</b> " . $row["cur_minute"] . "<br>";
+    echo "<b>3) SECOND():</b> " . $row["cur_second"] . "<br>";
+    echo "<b>4) DATE_FORMAT():</b> " . $row["formatted_date"] . "<br>";
+    echo "<b>5) DATE_SUB() (10 days before today):</b> " . $row["date_before_10days"] . "<br>";
+
+    $conn->close();
+?>
