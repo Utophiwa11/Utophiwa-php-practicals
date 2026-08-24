@@ -1,0 +1,35 @@
+<?php
+    echo "<b>1) array_change_key_case()</b><br>";
+    $var = array("Name" => "Rahul", "Age" => 21, "City" => "Rajkot");
+    print_r(array_change_key_case($var, CASE_UPPER));
+    echo "<br>";
+    print_r(array_change_key_case($var, CASE_LOWER));
+
+    echo "<br><br><b>2) array_chunk() - Months</b><br>";
+    $months = array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+    $chunks = array_chunk($months, 3);
+    print_r($chunks);
+
+    echo "<br><b>3) array_count_values()</b><br>";
+    $fruits = array("Apple", "Mango", "Apple", "Banana", "Mango", "Apple");
+    print_r(array_count_values($fruits));
+
+    echo "<br><b>4) array_pop()</b><br>";
+    $stack = array(10, 20, 30, 40);
+    $popped = array_pop($stack);
+    echo "Popped element: $popped <br>";
+    echo "Array after pop: " . implode(", ", $stack) . "<br>";
+
+    echo "<br><b>5) array_push()</b><br>";
+    array_push($stack, 50, 60);
+    echo "Array after push: " . implode(", ", $stack) . "<br>";
+
+    echo "<br><b>6) array_unshift()</b><br>";
+    array_unshift($stack, 5);
+    echo "Array after unshift: " . implode(", ", $stack) . "<br>";
+
+    echo "<br><b>7) array_shift()</b><br>";
+    $shifted = array_shift($stack);
+    echo "Shifted element: $shifted <br>";
+    echo "Array after shift: " . implode(", ", $stack);
+?>
