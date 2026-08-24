@@ -1,0 +1,30 @@
+<?php
+    $var1 = "123";
+    echo "Original value: $var1, Type: " . gettype($var1) . "<br>";
+
+    settype($var1, "integer");
+    echo "After settype to integer: $var1, Type: " . gettype($var1) . "<br><br>";
+
+    $var2 = 45.67;
+    echo "Original value: $var2, Type: " . gettype($var2) . "<br>";
+
+    settype($var2, "string");
+    echo "After settype to string: $var2, Type: " . gettype($var2) . "<br><br>";
+
+    $var3 = "0";
+    echo "Original value: $var3, Type: " . gettype($var3) . "<br>";
+
+    settype($var3, "boolean");
+    var_dump($var3);
+    echo "Type: " . gettype($var3) . "<br><br>";
+
+    // Casting using (type) syntax as well
+    $var4 = "99.99";
+    $castedFloat = (float)$var4;
+    echo "Casted using (float): $castedFloat, Type: " . gettype($castedFloat) . "<br>";
+
+    $var5 = 15;
+    $castedArray = (array)$var5;
+    print_r($castedArray);
+    echo "Type: " . gettype($castedArray);
+?>
