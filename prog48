@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Selectors</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1 id="mainHeading">Main Heading</h1>
+    <p class="para">Paragraph 1</p>
+    <p class="para">Paragraph 2</p>
+    <button id="btn1">Click Me</button>
+    <button id="btn2">Change Colors</button>
+
+    <script>
+        $(document).ready(function() {
+            $("#btn2").click(function() {
+                $("#mainHeading").css("background-color", "red");   // ID selector
+                $(".para").css("background-color", "red");          // Class selector
+                $("button").css("background-color", "red");         // Tag selector
+                $("p:first").css("color", "white");                 // Filter selector
+            });
+        });
+    </script>
+</body>
+</html>
