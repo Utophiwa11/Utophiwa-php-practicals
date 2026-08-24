@@ -1,0 +1,53 @@
+<?php
+    session_start();
+    if (!isset($_SESSION["loggedin"])) {
+        header("Location: login.php");
+        exit();
+    }
+
+    $servername = "localhost";
+    $dbUser = "root";
+    $dbPass = "";
+    $dbname = "test_db";
+
+    $conn = new mysqli($servername, $dbUser, $dbPass, $dbname);
+    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+
+    $username = $_SESSION["username"];
+    $message = "";
+
+    // Handle form submission (update details)
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $fullname = $_POST["fullname"];
+        $email = $_POST["email"];
+
+        $stmt = $conn->prepare("UPDATE users SET fullname = ?, email = ? WHERE username = ?");
+        $stmt->bind_param("sss", $fullname, $email, $username);
+
+        if ($stmt->execute()) {
+            $message = "Profile updated successfully!";
+        } else {
+            $message = "Error updating profile: " . $conn->error;
+        }
+        $stmt->close();
+    }
+
+    // Fetch current details to display in the form
+    $stmt = $conn->prepare("SELECT fullname, email, username FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
+    $conn->close();
+?>
+
+<h2>Edit Profile</h2>
+<?php if ($message != "") echo "<p style='color:green;'>$message</p>"; ?>
+
+<form method="post">
+    Full Name: <input type="text" name="fullname" value="<?php echo htmlspecialchars($user['fullname']); ?>" required><br><br>
+    Email: <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required><br><br>
+    Username: <input type="text" value="<?php echo htmlspecialchars($user['username']); ?>" disabled><br><br>
+    <input type="submit" value="Update Profile">
+</form>
