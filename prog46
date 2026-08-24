@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check jQuery Loaded</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>jQuery Load Check</h2>
+    <p id="status"></p>
+
+    <script>
+        if (typeof jQuery != 'undefined') {
+            document.getElementById("status").innerHTML =
+                "jQuery is loaded successfully! Version: " + jQuery.fn.jquery;
+        } else {
+            document.getElementById("status").innerHTML = "jQuery is NOT loaded.";
+        }
+    </script>
+</body>
+</html>
