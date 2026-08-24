@@ -1,0 +1,11 @@
+<?php
+    // Cookie must be set before any HTML output (uses header() internally)
+    if (!isset($_COOKIE["visited"])) {
+        setcookie("visited", "yes", time() + 3600);
+        header("Location: welcome.php"); // redirect using header
+        exit();
+    } else {
+        header("Location: dashboard.php");
+        exit();
+    }
+?>
