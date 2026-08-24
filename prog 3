@@ -1,0 +1,45 @@
+<?php
+    $a = 20;
+    $b = 6;
+
+    // Arithmetic Operators
+    echo "<b>Arithmetic Operators</b><br>";
+    echo "Addition: " . ($a + $b) . "<br>";
+    echo "Subtraction: " . ($a - $b) . "<br>";
+    echo "Multiplication: " . ($a * $b) . "<br>";
+    echo "Division: " . ($a / $b) . "<br>";
+    echo "Modulus: " . ($a % $b) . "<br>";
+    echo "Exponentiation: " . ($a ** 2) . "<br><br>";
+
+    // Comparison Operators
+    echo "<b>Comparison Operators</b><br>";
+    var_dump($a == $b);
+    var_dump($a != $b);
+    var_dump($a > $b);
+    var_dump($a < $b);
+    var_dump($a >= $b);
+    var_dump($a <= $b);
+    echo "<br>";
+
+    // Logical Operators
+    echo "<b>Logical Operators</b><br>";
+    var_dump($a > 10 && $b > 5);
+    var_dump($a > 10 || $b > 10);
+    var_dump(!($a > 10));
+    echo "<br>";
+
+    // Assignment Operators
+    echo "<b>Assignment Operators</b><br>";
+    $c = 10;
+    $c += 5; echo "c += 5 -> $c <br>";
+    $c -= 3; echo "c -= 3 -> $c <br>";
+    $c *= 2; echo "c *= 2 -> $c <br>";
+    $c /= 4; echo "c /= 4 -> $c <br>";
+
+    // Increment / Decrement Operators
+    echo "<br><b>Increment/Decrement</b><br>";
+    $x = 5;
+    echo "Pre-increment: " . (++$x) . "<br>";
+    echo "Post-decrement: " . ($x--) . "<br>";
+    echo "Value after: $x";
+?>
