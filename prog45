@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><title>AJAX with Database</title></head>
+<body>
+    <h2>Student List</h2>
+    <button onclick="loadData()">Load Students from DB</button>
+    <div id="output"></div>
+
+    <script>
+        function loadData() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("output").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "fetch_students.php", true);
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>
