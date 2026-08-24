@@ -1,0 +1,13 @@
+<?php
+    session_start(); // must be called before any output
+
+    $_SESSION["username"] = "Rahul Sharma";
+    $_SESSION["role"] = "Student";
+    $_SESSION["login_time"] = date("Y-m-d H:i:s");
+
+    echo "Session created successfully!<br>";
+    echo "Username: " . $_SESSION["username"] . "<br>";
+    echo "Role: " . $_SESSION["role"] . "<br>";
+    echo "Login Time: " . $_SESSION["login_time"] . "<br>";
+    echo "Session ID: " . session_id();
+?>
