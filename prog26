@@ -1,0 +1,14 @@
+<?php
+    session_start();
+
+    echo "Before destroy: <br>";
+    print_r($_SESSION);
+
+    // Unset all session variables
+    session_unset();
+
+    // Destroy the session completely
+    session_destroy();
+
+    echo "<br><br>Session has been destroyed successfully.";
+?>
