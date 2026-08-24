@@ -1,0 +1,26 @@
+<?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $input = $_POST["arrValues"];
+        $arr = explode(",", $input);
+        $arr = array_map('trim', $arr);
+        $arr = array_map('intval', $arr); // convert to numbers
+
+        echo "Original Array: " . implode(", ", $arr) . "<br>";
+
+        // Ascending order
+        $ascArr = $arr;
+        sort($ascArr);
+        echo "Ascending Order (sort): " . implode(", ", $ascArr) . "<br>";
+
+        // Descending order
+        $descArr = $arr;
+        rsort($descArr);
+        echo "Descending Order (rsort): " . implode(", ", $descArr) . "<br>";
+    }
+?>
+
+<form method="post">
+    Enter numbers (comma separated): 
+    <input type="text" name="arrValues" placeholder="e.g. 45,12,78,3,29">
+    <input type="submit" value="Sort">
+</form>
