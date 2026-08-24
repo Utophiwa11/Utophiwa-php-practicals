@@ -1,0 +1,39 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "test_db";
+
+    // ---------- Using MySQLi ----------
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+
+    echo "<b>MySQLi Result:</b><br>";
+    $sql = "SELECT id, name, email, course FROM students";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "ID: " . $row["id"] . " | Name: " . $row["name"] . " | Email: " . $row["email"] . " | Course: " . $row["course"] . "<br>";
+        }
+    } else {
+        echo "No records found.<br>";
+    }
+    $conn->close();
+
+    // ---------- Using PDO ----------
+    try {
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        echo "<br><b>PDO Result:</b><br>";
+        $stmt = $pdo->query("SELECT id, name, subject FROM teachers");
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            echo "ID: " . $row["id"] . " | Name: " . $row["name"] . " | Subject: " . $row["subject"] . "<br>";
+        }
+    } catch (PDOException $e) {
+        echo "PDO Error: " . $e->getMessage();
+    }
+    $pdo = null;
+?>
