@@ -1,0 +1,25 @@
+<?php
+    $a = 45;
+    $b = 12;
+    $c = 78;
+    $d = 34;
+
+    // Using built-in functions
+    $max = max($a, $b, $c, $d);
+    $min = min($a, $b, $c, $d);
+
+    echo "Numbers: $a, $b, $c, $d <br>";
+    echo "Maximum number is: $max <br>";
+    echo "Minimum number is: $min <br>";
+
+    // Without built-in functions (manual logic)
+    $numbers = array($a, $b, $c, $d);
+    $maxVal = $numbers[0];
+    $minVal = $numbers[0];
+
+    foreach ($numbers as $num) {
+        if ($num > $maxVal) $maxVal = $num;
+        if ($num < $minVal) $minVal = $num;
+    }
+    echo "<br>Manual Method -> Max: $maxVal, Min: $minVal";
+?>
