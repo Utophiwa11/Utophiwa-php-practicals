@@ -1,0 +1,18 @@
+<?php
+    // Using HTML form to take array input (comma separated)
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $input = $_POST["arrValues"];
+        $arr = explode(",", $input);   // convert string to array
+
+        echo "<b>Array values entered:</b><br>";
+        foreach ($arr as $index => $value) {
+            echo "Element[$index]: " . trim($value) . "<br>";
+        }
+    }
+?>
+
+<form method="post">
+    Enter array values (comma separated): 
+    <input type="text" name="arrValues" placeholder="e.g. 10,20,30,40">
+    <input type="submit" value="Submit">
+</form>
